@@ -74,12 +74,12 @@ export default function OneTileCard({
       {/* Swap Options (if available) */}
       {tile.swap_options && onSwap && (
         <div className="space-y-2">
-          <p className="text-sm text-slate-600">Or choose a different tiny step:</p>
+          <p className="text-sm text-[#6B7280]">Or choose a different tiny step:</p>
           {tile.swap_options.map((option, idx) => (
             <button
               key={idx}
               onClick={() => onSwap(option)}
-              className="w-full text-left px-4 py-2 bg-slate-100 hover:bg-slate-200 rounded-lg text-sm text-slate-700 transition"
+              className="w-full text-left px-4 py-2 bg-[#F8FAFC] hover:bg-[#E5E7EB] rounded-lg text-sm text-[#1F2933] transition"
             >
               {option}
             </button>

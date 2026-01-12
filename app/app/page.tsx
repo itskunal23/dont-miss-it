@@ -136,7 +136,7 @@ export default function AppPage() {
   if (loading) {
     return (
       <div className="text-center py-12">
-        <p className="text-slate-600">Loading...</p>
+        <p className="text-[#6B7280]">Loading...</p>
       </div>
     )
   }

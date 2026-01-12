@@ -57,7 +57,7 @@ export default function SignupPage() {
       <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-2xl shadow-sm border border-[#E5E7EB]">
         <div>
           <h1 className="text-3xl font-semibold text-center text-[#1F2933]">Dont Miss It</h1>
-          <p className="mt-2 text-center text-sm text-slate-600">
+          <p className="mt-2 text-center text-sm text-[#6B7280]">
             Create your account
           </p>
         </div>
@@ -69,7 +69,7 @@ export default function SignupPage() {
           )}
           <div className="space-y-4">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-slate-700">
+              <label htmlFor="email" className="block text-sm font-medium text-[#1F2933]">
                 Email
               </label>
               <input
@@ -79,12 +79,12 @@ export default function SignupPage() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-slate-500"
+                className="mt-1 block w-full px-3 py-2 border border-[#E5E7EB] rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5] text-[#1F2933]"
                 placeholder="you@example.com"
               />
             </div>
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-slate-700">
+              <label htmlFor="password" className="block text-sm font-medium text-[#1F2933]">
                 Password
               </label>
               <input
@@ -95,10 +95,10 @@ export default function SignupPage() {
                 minLength={6}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-slate-500"
+                className="mt-1 block w-full px-3 py-2 border border-[#E5E7EB] rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5] text-[#1F2933]"
                 placeholder="••••••••"
               />
-              <p className="mt-1 text-xs text-slate-500">At least 6 characters</p>
+              <p className="mt-1 text-xs text-[#6B7280]">At least 6 characters</p>
             </div>
           </div>
 
@@ -113,8 +113,8 @@ export default function SignupPage() {
           </div>
 
           <div className="text-center text-sm">
-            <span className="text-slate-600">Already have an account? </span>
-            <Link href="/login" className="font-medium text-slate-900 hover:text-slate-700">
+            <span className="text-[#6B7280]">Already have an account? </span>
+            <Link href="/login" className="font-medium text-[#4F46E5] hover:text-[#4338CA]">
               Sign in
             </Link>
           </div>

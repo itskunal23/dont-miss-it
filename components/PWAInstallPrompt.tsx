@@ -42,22 +42,22 @@ export default function PWAInstallPrompt() {
   if (!showPrompt || !deferredPrompt) return null
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:max-w-sm bg-white rounded-lg shadow-lg border border-slate-200 p-4 z-50">
+    <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:max-w-sm bg-white rounded-lg shadow-lg border border-[#E5E7EB] p-4 z-50">
       <div className="flex items-start justify-between mb-2">
         <div>
-          <h3 className="font-medium text-slate-900 mb-1">Install Dont Miss It</h3>
-          <p className="text-sm text-slate-600">Add to your home screen for quick access</p>
+          <h3 className="font-medium text-[#1F2933] mb-1">Install Dont Miss It</h3>
+          <p className="text-sm text-[#6B7280]">Add to your home screen for quick access</p>
         </div>
         <button
           onClick={() => setShowPrompt(false)}
-          className="text-slate-400 hover:text-slate-600"
+          className="text-[#6B7280] hover:text-[#1F2933]"
         >
           ×
         </button>
       </div>
       <button
         onClick={handleInstall}
-        className="w-full mt-3 py-2 px-4 bg-slate-900 text-white rounded-lg text-sm font-medium hover:bg-slate-800 transition"
+        className="w-full mt-3 py-2 px-4 bg-[#4F46E5] text-white rounded-lg text-sm font-medium hover:bg-[#4338CA] transition"
       >
         Install
       </button>
