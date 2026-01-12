@@ -47,23 +47,23 @@ export default function TimerModal({ minutes, onComplete, onContinue, onCancel }
 
   if (isFinished) {
     return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-        <div className="bg-white rounded-2xl p-8 max-w-sm w-full text-center space-y-6">
-          <div className="text-6xl">✨</div>
+      <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+        <div className="bg-white rounded-2xl p-8 max-w-sm w-full text-center space-y-6 border border-[#E5E7EB] shadow-lg">
+          <div className="text-5xl animate-soft-pulse">✨</div>
           <div>
-            <h3 className="text-2xl font-light text-slate-900 mb-2">Time's up!</h3>
-            <p className="text-slate-600">You showed up. That's what counts.</p>
+            <h3 className="text-2xl font-semibold text-[#1F2933] mb-2">Time's up!</h3>
+            <p className="text-[#6B7280]">You showed up. That's what counts.</p>
           </div>
           <div className="space-y-2">
             <button
               onClick={onComplete}
-              className="w-full py-3 px-4 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 transition"
+              className="w-full py-3 px-4 bg-[#86EFAC] text-[#059669] rounded-lg font-semibold hover:bg-[#86EFAC]/80 transition-colors"
             >
               I'm done
             </button>
             <button
               onClick={onContinue}
-              className="w-full py-3 px-4 border border-slate-300 text-slate-700 rounded-lg font-medium hover:bg-slate-50 transition"
+              className="w-full py-3 px-4 border border-[#E5E7EB] text-[#1F2933] rounded-lg font-medium hover:bg-[#FAFAF9] transition-colors"
             >
               Continue for 10 more minutes
             </button>
@@ -74,13 +74,13 @@ export default function TimerModal({ minutes, onComplete, onContinue, onCancel }
   }
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl p-8 max-w-sm w-full text-center space-y-6">
+    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-2xl p-8 max-w-sm w-full text-center space-y-6 border border-[#E5E7EB] shadow-lg">
         <div>
-          <div className="text-5xl font-light text-slate-900 mb-2">{formatTime(seconds)}</div>
-          <div className="w-full bg-slate-200 rounded-full h-2">
+          <div className="text-5xl font-semibold text-[#1F2933] mb-3">{formatTime(seconds)}</div>
+          <div className="w-full bg-[#E5E7EB] rounded-full h-2">
             <div
-              className="bg-slate-900 h-2 rounded-full transition-all duration-1000"
+              className="bg-[#4F46E5] h-2 rounded-full transition-all duration-1000"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -90,21 +90,21 @@ export default function TimerModal({ minutes, onComplete, onContinue, onCancel }
           {!isRunning ? (
             <button
               onClick={() => setIsRunning(true)}
-              className="w-full py-3 px-4 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 transition"
+              className="w-full py-3 px-4 bg-[#4F46E5] text-white rounded-lg font-semibold hover:bg-[#4338CA] transition-colors"
             >
               Start timer
             </button>
           ) : (
             <button
               onClick={() => setIsRunning(false)}
-              className="w-full py-3 px-4 border border-slate-300 text-slate-700 rounded-lg font-medium hover:bg-slate-50 transition"
+              className="w-full py-3 px-4 border border-[#E5E7EB] text-[#1F2933] rounded-lg font-medium hover:bg-[#FAFAF9] transition-colors"
             >
               Pause
             </button>
           )}
           <button
             onClick={onCancel}
-            className="w-full py-2 px-4 text-sm text-slate-600 hover:text-slate-900 transition"
+            className="w-full py-2 px-4 text-sm text-[#6B7280] hover:text-[#1F2933] transition-colors"
           >
             Cancel
           </button>

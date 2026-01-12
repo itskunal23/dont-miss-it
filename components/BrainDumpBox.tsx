@@ -27,21 +27,21 @@ export default function BrainDumpBox({ onSubmit, disabled }: BrainDumpBoxProps) 
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-3">
+    <form onSubmit={handleSubmit} className="space-y-4">
       <textarea
         value={text}
         onChange={(e) => setText(e.target.value)}
-        placeholder="Dump what's on your mind..."
+        placeholder="Type anything... 'Reply to Sarah, pay bill by Friday, study for exam'"
         disabled={disabled || loading}
-        rows={3}
-        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-slate-500 resize-none disabled:opacity-50 disabled:cursor-not-allowed"
+        rows={4}
+        className="w-full px-4 py-3 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5] resize-none disabled:opacity-50 disabled:cursor-not-allowed bg-white text-[#1F2933] placeholder:text-[#6B7280] transition-all"
       />
       <button
         type="submit"
         disabled={!text.trim() || loading || disabled}
-        className="w-full py-2 px-4 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 transition disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full py-3 px-4 bg-[#4F46E5] text-white rounded-lg font-semibold hover:bg-[#4338CA] transition-colors shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        {loading ? 'Creating step...' : 'Turn into next step'}
+        {loading ? 'Creating your step...' : 'Turn into next step'}
       </button>
     </form>
   )

@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "QuietDeadline - One calm step at a time",
-  description: "Anti-planner for Type-B people. Dump what's on your mind. Get a tiny next step you can do in 10–20 minutes.",
+  title: "Dont Miss It - Turn overwhelm into one calm next step",
+  description: "The anti-planner for everyone. Dump what's on your mind. Get one tiny step you can do in 10–20 minutes. No guilt. Just progress.",
 };
 
 export default function RootLayout({
@@ -26,10 +26,10 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#0f172a" />
+        <meta name="theme-color" content="#4F46E5" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="QuietDeadline" />
+        <meta name="apple-mobile-web-app-title" content="Dont Miss It" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

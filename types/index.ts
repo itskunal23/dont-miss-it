@@ -1,4 +1,4 @@
-// Type definitions for QuietDeadline
+// Type definitions for Dont Miss It
 // Note: DashboardClient.tsx appears to be from a different project
 // These types are stubs to resolve import errors
 

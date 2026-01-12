@@ -142,10 +142,12 @@ export default function AppPage() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 min-h-screen bg-[#FAFAF9] -m-4 p-8">
       <div>
-        <h1 className="text-3xl font-light text-slate-900 mb-2">Today's calm step</h1>
-        <p className="text-slate-600">One thing at a time. No guilt, no noise.</p>
+        <h1 className="text-3xl md:text-4xl font-semibold text-[#1F2933] mb-2">
+          Your next step
+        </h1>
+        <p className="text-[#6B7280]">One thing at a time. No guilt. Just progress.</p>
       </div>
 
       {tile ? (
@@ -157,14 +159,16 @@ export default function AppPage() {
           onDone={handleDone}
         />
       ) : (
-        <div className="bg-white rounded-2xl shadow-lg p-12 text-center border border-slate-100">
-          <p className="text-slate-600 mb-4">No active step right now.</p>
-          <p className="text-sm text-slate-500">Dump what's on your mind below to get started.</p>
+        <div className="bg-white rounded-2xl shadow-sm p-12 text-center border border-[#E5E7EB]">
+          <div className="text-5xl mb-4">✨</div>
+          <p className="text-lg text-[#1F2933] font-semibold mb-2">No active step right now.</p>
+          <p className="text-[#6B7280]">Dump what's on your mind below to get started.</p>
         </div>
       )}
 
-      <div>
-        <h2 className="text-xl font-light text-slate-900 mb-4">Brain dump</h2>
+      <div className="bg-white rounded-2xl p-6 border border-[#E5E7EB] shadow-sm">
+        <h2 className="text-xl font-semibold text-[#1F2933] mb-2">Brain dump</h2>
+        <p className="text-sm text-[#6B7280] mb-4">Type anything. Messy is totally fine.</p>
         <BrainDumpBox onSubmit={handleCapture} />
       </div>
 

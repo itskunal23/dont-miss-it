@@ -19,6 +19,14 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  // Suppress React DevTools warnings about params enumeration
+  reactStrictMode: true,
+  // Logging configuration
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
+  },
 };
 
 export default nextConfig;

@@ -45,7 +45,7 @@ export default function PWAInstallPrompt() {
     <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:max-w-sm bg-white rounded-lg shadow-lg border border-slate-200 p-4 z-50">
       <div className="flex items-start justify-between mb-2">
         <div>
-          <h3 className="font-medium text-slate-900 mb-1">Install QuietDeadline</h3>
+          <h3 className="font-medium text-slate-900 mb-1">Install Dont Miss It</h3>
           <p className="text-sm text-slate-600">Add to your home screen for quick access</p>
         </div>
         <button

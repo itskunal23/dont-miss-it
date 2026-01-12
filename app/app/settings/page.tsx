@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabaseClient'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 interface Profile {
   id: string
@@ -17,11 +17,20 @@ export default function SettingsPage() {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const router = useRouter()
+  const searchParams = useSearchParams()
   const supabase = createClient()
 
   useEffect(() => {
     fetchProfile()
-  }, [])
+    
+    // Handle Stripe redirect success
+    if (searchParams.get('success') === 'true') {
+      // Show success message or refresh profile
+      setTimeout(() => {
+        fetchProfile()
+      }, 1000)
+    }
+  }, [searchParams])
 
   const fetchProfile = async () => {
     try {
@@ -78,7 +87,7 @@ export default function SettingsPage() {
   if (loading) {
     return (
       <div className="text-center py-12">
-        <p className="text-slate-600">Loading...</p>
+        <p className="text-[#6B7280]">Loading...</p>
       </div>
     )
   }
@@ -86,19 +95,19 @@ export default function SettingsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-light text-slate-900 mb-2">Settings</h1>
+        <h1 className="text-3xl font-semibold text-[#1F2933] mb-2">Settings</h1>
       </div>
 
-      <div className="bg-white rounded-2xl shadow-lg p-6 space-y-6 border border-slate-100">
+      <div className="bg-white rounded-2xl shadow-sm p-6 space-y-6 border border-[#E5E7EB]">
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">
+          <label className="block text-sm font-medium text-[#1F2933] mb-2">
             Default step size (minutes)
           </label>
           <select
             value={profile?.preferred_minutes_default || 15}
             onChange={(e) => handleUpdate('preferred_minutes_default', Number(e.target.value))}
             disabled={saving}
-            className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500"
+            className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5] bg-white text-[#1F2933]"
           >
             <option value={5}>5</option>
             <option value={10}>10</option>
@@ -109,14 +118,14 @@ export default function SettingsPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">
+          <label className="block text-sm font-medium text-[#1F2933] mb-2">
             Preferred time of day
           </label>
           <select
             value={profile?.preferred_time_of_day || 'varies'}
             onChange={(e) => handleUpdate('preferred_time_of_day', e.target.value)}
             disabled={saving}
-            className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500"
+            className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5] bg-white text-[#1F2933]"
           >
             <option value="morning">Morning</option>
             <option value="afternoon">Afternoon</option>
@@ -126,14 +135,14 @@ export default function SettingsPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-2">
+          <label className="block text-sm font-medium text-[#1F2933] mb-2">
             Energy mode
           </label>
           <select
             value={profile?.energy_default || 'normal'}
             onChange={(e) => handleUpdate('energy_default', e.target.value)}
             disabled={saving}
-            className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500"
+            className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5] bg-white text-[#1F2933]"
           >
             <option value="low">Low</option>
             <option value="normal">Normal</option>
@@ -141,22 +150,22 @@ export default function SettingsPage() {
           </select>
         </div>
 
-        <div className="pt-4 border-t border-slate-200">
-          <p className="text-sm text-slate-600 mb-2">Plan: <span className="font-medium capitalize">{profile?.plan || 'free'}</span></p>
+        <div className="pt-4 border-t border-[#E5E7EB]">
+          <p className="text-sm text-[#6B7280] mb-2">Plan: <span className="font-semibold capitalize text-[#1F2933]">{profile?.plan || 'free'}</span></p>
           {profile?.plan === 'free' && (
             <a
               href="/pricing"
-              className="text-sm text-slate-900 hover:underline"
+              className="text-sm text-[#4F46E5] hover:text-[#4338CA] font-medium transition-colors"
             >
               Upgrade to Pro →
             </a>
           )}
         </div>
 
-        <div className="pt-4 border-t border-slate-200">
+        <div className="pt-4 border-t border-[#E5E7EB]">
           <button
             onClick={handleSignOut}
-            className="px-4 py-2 text-sm text-red-600 hover:text-red-700 border border-red-200 rounded-lg hover:bg-red-50 transition"
+            className="px-4 py-2 text-sm text-red-600 hover:text-red-700 border border-red-200 rounded-lg hover:bg-red-50 transition-colors"
           >
             Sign out
           </button>

@@ -36,7 +36,7 @@ export default function QueuePage() {
   if (loading) {
     return (
       <div className="text-center py-12">
-        <p className="text-slate-600">Loading...</p>
+        <p className="text-[#6B7280]">Loading...</p>
       </div>
     )
   }
@@ -44,14 +44,14 @@ export default function QueuePage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-light text-slate-900 mb-2">Your queue</h1>
-        <p className="text-slate-600">These steps are waiting for you. No rush.</p>
+        <h1 className="text-3xl font-semibold text-[#1F2933] mb-2">Your queue</h1>
+        <p className="text-[#6B7280]">These steps are waiting for you. No rush.</p>
       </div>
 
       {tiles.length === 0 ? (
-        <div className="bg-white rounded-2xl shadow-lg p-12 text-center border border-slate-100">
-          <p className="text-slate-600">Your queue is empty.</p>
-          <p className="text-sm text-slate-500 mt-2">New steps will appear here when you have an active tile.</p>
+        <div className="bg-white rounded-2xl shadow-sm p-12 text-center border border-[#E5E7EB]">
+          <p className="text-[#6B7280]">Your queue is empty.</p>
+          <p className="text-sm text-[#6B7280] mt-2">New steps will appear here when you have an active tile.</p>
         </div>
       ) : (
         <div className="space-y-4">
@@ -60,16 +60,16 @@ export default function QueuePage() {
             return (
               <div
                 key={tile.id}
-                className="bg-white rounded-xl shadow-sm p-6 border border-slate-100"
+                className="bg-white rounded-xl shadow-sm p-6 border border-[#E5E7EB] hover:border-[#4F46E5]/20 transition-colors"
               >
                 <div className="flex items-start justify-between mb-2">
-                  <h3 className="text-lg font-light text-slate-900">{tile.title}</h3>
-                  <span className="px-2 py-1 bg-slate-100 rounded text-xs text-slate-600">
+                  <h3 className="text-lg font-semibold text-[#1F2933]">{tile.title}</h3>
+                  <span className="px-2.5 py-1 bg-[#4F46E5]/10 text-[#4F46E5] rounded-md text-xs font-medium">
                     {tile.minutes} min
                   </span>
                 </div>
-                <p className="text-slate-600 text-sm mb-3">{tile.next_step}</p>
-                <div className="flex items-center gap-3 text-xs text-slate-500">
+                <p className="text-[#6B7280] text-sm mb-3 leading-relaxed">{tile.next_step}</p>
+                <div className="flex items-center gap-3 text-xs text-[#6B7280]">
                   <span>{tile.category}</span>
                   {dueDate && (
                     <>

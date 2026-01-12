@@ -35,87 +35,91 @@ export default function PricingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-12 px-4">
+    <div className="min-h-screen bg-[#FAFAF9] py-12 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-light text-slate-900 mb-4">Simple pricing</h1>
-          <p className="text-slate-600">Choose what works for you</p>
+          <h1 className="text-4xl md:text-5xl font-semibold text-[#1F2933] mb-4">
+            Simple pricing
+          </h1>
+          <p className="text-lg text-[#6B7280]">Choose what works for you</p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
           {/* Free Tier */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 border border-slate-200">
-            <h2 className="text-2xl font-light text-slate-900 mb-2">Free</h2>
+          <div className="bg-white rounded-2xl shadow-sm p-8 border border-[#E5E7EB] hover:border-[#4F46E5]/30 hover:shadow-md transition-all">
+            <h2 className="text-2xl font-semibold text-[#1F2933] mb-2">Free</h2>
             <div className="mb-6">
-              <span className="text-4xl font-light">$0</span>
-              <span className="text-slate-600">/month</span>
+              <span className="text-4xl font-semibold text-[#1F2933]">$0</span>
+              <span className="text-[#6B7280]">/month</span>
             </div>
-            <ul className="space-y-3 mb-8 text-sm text-slate-600">
+            <ul className="space-y-3 mb-8 text-sm text-[#6B7280]">
               <li className="flex items-start">
-                <span className="mr-2">✓</span>
+                <span className="mr-2 text-[#86EFAC] font-semibold">✓</span>
                 <span>25 captures per month</span>
               </li>
               <li className="flex items-start">
-                <span className="mr-2">✓</span>
+                <span className="mr-2 text-[#86EFAC] font-semibold">✓</span>
                 <span>1 active tile at a time</span>
               </li>
               <li className="flex items-start">
-                <span className="mr-2">✓</span>
+                <span className="mr-2 text-[#86EFAC] font-semibold">✓</span>
                 <span>Rules-based engine</span>
               </li>
               <li className="flex items-start">
-                <span className="mr-2">✓</span>
+                <span className="mr-2 text-[#86EFAC] font-semibold">✓</span>
                 <span>Basic insights</span>
               </li>
             </ul>
             <Link
               href="/signup"
-              className="block w-full text-center py-3 px-4 border-2 border-slate-300 text-slate-900 rounded-lg font-medium hover:bg-slate-50 transition"
+              className="block w-full text-center py-3 px-4 border border-[#E5E7EB] text-[#1F2933] rounded-lg font-semibold hover:bg-[#FAFAF9] hover:border-[#4F46E5]/30 transition-all"
             >
               Get started
             </Link>
           </div>
 
           {/* Pro Tier */}
-          <div className="bg-slate-900 rounded-2xl shadow-lg p-8 border-2 border-slate-900 text-white">
-            <div className="flex items-center justify-between mb-2">
-              <h2 className="text-2xl font-light">Pro</h2>
-              <span className="px-2 py-1 bg-white text-slate-900 text-xs rounded">Popular</span>
+          <div className="bg-[#4F46E5] rounded-2xl shadow-md p-8 border border-[#4338CA] text-white relative">
+            <div className="absolute top-4 right-4 px-2 py-1 bg-white/20 text-white text-xs font-semibold rounded-md">
+              Popular
+            </div>
+            <div className="mb-2">
+              <h2 className="text-2xl font-semibold">Pro</h2>
             </div>
             <div className="mb-6">
-              <span className="text-4xl font-light">$9.99</span>
-              <span className="text-slate-300">/month</span>
-              <span className="text-sm text-slate-400 ml-2">or $79/year</span>
+              <span className="text-4xl font-semibold">$9.99</span>
+              <span className="text-white/80">/month</span>
+              <span className="text-sm text-white/70 ml-2 block mt-1">or $79/year (save 34%)</span>
             </div>
-            <ul className="space-y-3 mb-8 text-sm text-slate-300">
+            <ul className="space-y-3 mb-8 text-sm text-white/90">
               <li className="flex items-start">
-                <span className="mr-2">✓</span>
+                <span className="mr-2 text-[#FACC15] font-semibold">✓</span>
                 <span>Unlimited captures</span>
               </li>
               <li className="flex items-start">
-                <span className="mr-2">✓</span>
-                <span>Smart Assist (Ollama) for messy inputs</span>
+                <span className="mr-2 text-[#FACC15] font-semibold">✓</span>
+                <span>Smart Assist (AI) for messy inputs</span>
               </li>
               <li className="flex items-start">
-                <span className="mr-2">✓</span>
+                <span className="mr-2 text-[#FACC15] font-semibold">✓</span>
                 <span>Advanced anti-avoidance insights</span>
               </li>
               <li className="flex items-start">
-                <span className="mr-2">✓</span>
+                <span className="mr-2 text-[#FACC15] font-semibold">✓</span>
                 <span>More reminder options</span>
               </li>
             </ul>
             <button
               onClick={() => handleCheckout(PRICE_IDS.monthly)}
               disabled={loading !== null}
-              className="w-full py-3 px-4 bg-white text-slate-900 rounded-lg font-medium hover:bg-slate-100 transition disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-3 px-4 bg-white text-[#4F46E5] rounded-lg font-semibold hover:bg-white/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading === PRICE_IDS.monthly ? 'Loading...' : 'Start Pro trial'}
             </button>
             <button
               onClick={() => handleCheckout(PRICE_IDS.yearly)}
               disabled={loading !== null}
-              className="w-full mt-2 py-2 px-4 border-2 border-white text-white rounded-lg font-medium hover:bg-white hover:text-slate-900 transition disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+              className="w-full mt-3 py-2.5 px-4 border border-white/30 text-white rounded-lg font-semibold hover:bg-white/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm"
             >
               {loading === PRICE_IDS.yearly ? 'Loading...' : 'Save with yearly ($79/yr)'}
             </button>
@@ -123,7 +127,7 @@ export default function PricingPage() {
         </div>
 
         <div className="mt-12 text-center">
-          <Link href="/" className="text-slate-600 hover:text-slate-900">
+          <Link href="/" className="text-[#6B7280] hover:text-[#1F2933] font-medium transition-colors">
             ← Back to home
           </Link>
         </div>

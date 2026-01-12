@@ -97,7 +97,7 @@ export default function InsightsPage() {
   if (loading) {
     return (
       <div className="text-center py-12">
-        <p className="text-slate-600">Loading...</p>
+        <p className="text-[#6B7280]">Loading...</p>
       </div>
     )
   }
@@ -106,11 +106,11 @@ export default function InsightsPage() {
     return (
       <div className="space-y-6">
         <div>
-          <h1 className="text-3xl font-light text-slate-900 mb-2">Insights</h1>
-          <p className="text-slate-600">What works for you</p>
+          <h1 className="text-3xl font-semibold text-[#1F2933] mb-2">Insights</h1>
+          <p className="text-[#6B7280]">What works for you</p>
         </div>
-        <div className="bg-white rounded-2xl shadow-lg p-12 text-center border border-slate-100">
-          <p className="text-slate-600">Complete a few steps to see insights.</p>
+        <div className="bg-white rounded-2xl shadow-sm p-12 text-center border border-[#E5E7EB]">
+          <p className="text-[#6B7280]">Complete a few steps to see insights.</p>
         </div>
       </div>
     )
@@ -119,35 +119,35 @@ export default function InsightsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-light text-slate-900 mb-2">Insights</h1>
-        <p className="text-slate-600">What works for you</p>
+        <h1 className="text-3xl font-semibold text-[#1F2933] mb-2">Insights</h1>
+        <p className="text-[#6B7280]">What works for you</p>
       </div>
 
       <div className="grid gap-4">
-        <div className="bg-white rounded-xl shadow-sm p-6 border border-slate-100">
-          <h3 className="text-sm font-medium text-slate-500 mb-1">Total steps completed</h3>
-          <p className="text-3xl font-light text-slate-900">{insights.totalCompleted}</p>
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-[#E5E7EB]">
+          <h3 className="text-sm font-medium text-[#6B7280] mb-1">Total steps completed</h3>
+          <p className="text-3xl font-semibold text-[#1F2933]">{insights.totalCompleted}</p>
         </div>
 
         {insights.bestTimeOfDay && (
-          <div className="bg-white rounded-xl shadow-sm p-6 border border-slate-100">
-            <h3 className="text-sm font-medium text-slate-500 mb-1">Your best time</h3>
-            <p className="text-2xl font-light text-slate-900 capitalize">{insights.bestTimeOfDay}</p>
-            <p className="text-xs text-slate-500 mt-1">When you usually get things done</p>
+          <div className="bg-white rounded-xl shadow-sm p-6 border border-[#E5E7EB]">
+            <h3 className="text-sm font-medium text-[#6B7280] mb-1">Your best time</h3>
+            <p className="text-2xl font-semibold text-[#1F2933] capitalize">{insights.bestTimeOfDay}</p>
+            <p className="text-xs text-[#6B7280] mt-1">When you usually get things done</p>
           </div>
         )}
 
         {insights.averageMinutes > 0 && (
-          <div className="bg-white rounded-xl shadow-sm p-6 border border-slate-100">
-            <h3 className="text-sm font-medium text-slate-500 mb-1">Average step size</h3>
-            <p className="text-2xl font-light text-slate-900">{insights.averageMinutes} minutes</p>
+          <div className="bg-white rounded-xl shadow-sm p-6 border border-[#E5E7EB]">
+            <h3 className="text-sm font-medium text-[#6B7280] mb-1">Average step size</h3>
+            <p className="text-2xl font-semibold text-[#1F2933]">{insights.averageMinutes} minutes</p>
           </div>
         )}
 
         {insights.topCategory && (
-          <div className="bg-white rounded-xl shadow-sm p-6 border border-slate-100">
-            <h3 className="text-sm font-medium text-slate-500 mb-1">Most common category</h3>
-            <p className="text-2xl font-light text-slate-900 capitalize">{insights.topCategory}</p>
+          <div className="bg-white rounded-xl shadow-sm p-6 border border-[#E5E7EB]">
+            <h3 className="text-sm font-medium text-[#6B7280] mb-1">Most common category</h3>
+            <p className="text-2xl font-semibold text-[#1F2933] capitalize">{insights.topCategory}</p>
           </div>
         )}
       </div>

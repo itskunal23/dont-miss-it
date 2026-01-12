@@ -78,7 +78,7 @@ export default function OnboardingPage() {
   return (
     <div className="max-w-lg mx-auto space-y-8 py-12">
       <div className="text-center">
-        <h1 className="text-3xl font-light text-slate-900 mb-2">Welcome to QuietDeadline</h1>
+        <h1 className="text-3xl font-semibold text-[#1F2933] mb-2">Welcome to Dont Miss It</h1>
         <p className="text-slate-600">Let's set you up in under 90 seconds</p>
       </div>
 
@@ -164,7 +164,7 @@ export default function OnboardingPage() {
           <button
             onClick={handleNext}
             disabled={!canProceed() || loading}
-            className="px-6 py-2 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-6 py-2 bg-[#4F46E5] text-white rounded-lg font-semibold hover:bg-[#4338CA] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? 'Saving...' : step === 3 ? 'Get started' : 'Next'}
           </button>

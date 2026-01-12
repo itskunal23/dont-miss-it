@@ -1,5 +1,5 @@
-// Service Worker for QuietDeadline PWA
-const CACHE_NAME = 'quietdeadline-v1'
+// Service Worker for Dont Miss It PWA
+const CACHE_NAME = 'dont-miss-it-v1'
 const urlsToCache = [
   '/',
   '/app',

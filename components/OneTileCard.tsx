@@ -32,9 +32,9 @@ export default function OneTileCard({
   onSwap,
 }: OneTileCardProps) {
   const difficultyColors = {
-    low: 'bg-green-100 text-green-800',
-    med: 'bg-yellow-100 text-yellow-800',
-    high: 'bg-orange-100 text-orange-800',
+    low: 'bg-[#86EFAC]/20 text-[#059669] border-[#86EFAC]/40',
+    med: 'bg-[#FDE68A]/20 text-[#D97706] border-[#FDE68A]/40',
+    high: 'bg-[#FCA5A5]/20 text-[#DC2626] border-[#FCA5A5]/40',
   }
 
   const dueDate = tile.due_at ? new Date(tile.due_at) : null
@@ -42,33 +42,33 @@ export default function OneTileCard({
   const isTomorrow = dueDate && format(dueDate, 'yyyy-MM-dd') === format(new Date(Date.now() + 86400000), 'yyyy-MM-dd')
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-6 space-y-6 border border-slate-100">
+    <div className="bg-white rounded-2xl shadow-sm p-6 space-y-6 border border-[#E5E7EB] hover:border-[#4F46E5]/30 hover:shadow-md transition-all duration-200 group">
       {/* Header */}
       <div>
-        <div className="flex items-start justify-between mb-2">
-          <h2 className="text-2xl font-light text-slate-900">{tile.title}</h2>
-          <span className={`px-2 py-1 rounded text-xs font-medium ${difficultyColors[tile.difficulty]}`}>
+        <div className="flex items-start justify-between mb-3">
+          <h2 className="text-2xl font-semibold text-[#1F2933] group-hover:text-[#4F46E5] transition-colors">{tile.title}</h2>
+          <span className={`px-2.5 py-1 rounded-md text-xs font-medium border ${difficultyColors[tile.difficulty]}`}>
             {tile.difficulty}
           </span>
         </div>
-        <div className="flex items-center gap-3 text-sm text-slate-600">
-          <span className="px-2 py-1 bg-slate-100 rounded">{tile.minutes} min</span>
+        <div className="flex items-center gap-2 text-sm flex-wrap">
+          <span className="px-2.5 py-1 bg-[#4F46E5]/10 text-[#4F46E5] rounded-md font-medium">{tile.minutes} min</span>
           {dueDate && (
-            <span className={`px-2 py-1 rounded ${
-              isToday ? 'bg-red-100 text-red-800' : 
-              isTomorrow ? 'bg-orange-100 text-orange-800' : 
-              'bg-blue-100 text-blue-800'
+            <span className={`px-2.5 py-1 rounded-md font-medium ${
+              isToday ? 'bg-red-50 text-red-700 border border-red-200' : 
+              isTomorrow ? 'bg-amber-50 text-amber-700 border border-amber-200' : 
+              'bg-[#4F46E5]/10 text-[#4F46E5] border border-[#4F46E5]/20'
             }`}>
               {isToday ? 'Today' : isTomorrow ? 'Tomorrow' : format(dueDate, 'MMM d')}
             </span>
           )}
-          <span className="text-slate-400">{tile.category}</span>
+          <span className="px-2.5 py-1 bg-[#F8FAFC] text-[#6B7280] rounded-md font-medium">{tile.category}</span>
         </div>
       </div>
 
       {/* Next Step */}
-      <div className="bg-slate-50 rounded-lg p-4">
-        <p className="text-slate-700 leading-relaxed">{tile.next_step}</p>
+      <div className="bg-[#FAFAF9] rounded-xl p-5 border border-[#E5E7EB]">
+        <p className="text-[#1F2933] leading-relaxed font-medium">{tile.next_step}</p>
       </div>
 
       {/* Swap Options (if available) */}
@@ -88,10 +88,10 @@ export default function OneTileCard({
       )}
 
       {/* Actions */}
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-3">
         <button
           onClick={onStart}
-          className="w-full py-3 px-4 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 transition shadow-sm"
+          className="w-full py-3 px-4 bg-[#4F46E5] text-white rounded-lg font-semibold hover:bg-[#4338CA] transition-colors shadow-sm hover:shadow-md"
         >
           Start
         </button>
@@ -99,19 +99,19 @@ export default function OneTileCard({
         <div className="grid grid-cols-3 gap-2">
           <button
             onClick={() => onSnooze('30m')}
-            className="py-2 px-3 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 transition"
+            className="py-2 px-3 text-sm border border-[#E5E7EB] rounded-lg hover:bg-[#FAFAF9] hover:border-[#4F46E5]/30 transition-all font-medium text-[#6B7280] hover:text-[#1F2933]"
           >
             Snooze 30m
           </button>
           <button
             onClick={onMakeSmaller}
-            className="py-2 px-3 text-sm border border-slate-300 rounded-lg hover:bg-slate-50 transition"
+            className="py-2 px-3 text-sm border border-[#E5E7EB] rounded-lg hover:bg-[#FAFAF9] hover:border-[#4F46E5]/30 transition-all font-medium text-[#6B7280] hover:text-[#1F2933]"
           >
             Make smaller
           </button>
           <button
             onClick={onDone}
-            className="py-2 px-3 text-sm border border-green-300 text-green-700 rounded-lg hover:bg-green-50 transition"
+            className="py-2 px-3 text-sm border border-[#86EFAC] bg-[#86EFAC]/10 text-[#059669] rounded-lg hover:bg-[#86EFAC]/20 transition-all font-semibold"
           >
             Done
           </button>

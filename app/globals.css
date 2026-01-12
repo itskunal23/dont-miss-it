@@ -1,26 +1,121 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Psychology-Based Color System for Calm + Healthy Dopamine */
+  /* Optimized for: anti-anxiety, trust, luxury, Gen-Z native */
+  
+  /* PRIMARY - Calm Focus (Indigo) */
+  --primary: #4F46E5; /* Soft deep indigo - clarity, intelligence, trust */
+  --primary-dark: #4338CA;
+  --primary-light: #6366F1;
+  
+  /* SUCCESS / PROGRESS - Soft Mint */
+  --success: #86EFAC; /* Calm green - progress, safety, non-judgmental */
+  --success-dark: #4ADE80;
+  
+  /* BACKGROUND - Warm Off-White */
+  --background: #FAFAF9; /* Paper-like, calm, reduces eye strain */
+  --surface: #FFFFFF;
+  
+  /* TEXT - Charcoal (Not Black) */
+  --foreground: #1F2933; /* Thoughtful, readable, modern */
+  --muted: #6B7280; /* Secondary text */
+  
+  /* BORDERS / DIVIDERS */
+  --border: #E5E7EB; /* Soft gray */
+  
+  /* DOPAMINE ACCENT - Soft Amber (Use Sparingly) */
+  --accent: #FACC15; /* Tiny celebratory moments only */
+  --accent-soft: #FDE68A;
+  
+  /* Subtle gradients for depth without noise */
+  --gradient-primary: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%);
+  --gradient-success: linear-gradient(135deg, #86EFAC 0%, #4ADE80 100%);
+  --gradient-soft: linear-gradient(135deg, #FAFAF9 0%, #F8FAFC 100%);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0F172A; /* Deep slate - premium, focused */
+    --surface: #1E293B;
+    --foreground: #E5E7EB; /* Soft white - readable, calm */
+    --muted: #94A3B8;
+    --border: #334155;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Calm, subtle animations - no overstimulation */
+@keyframes gentle-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes soft-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes calm-glow {
+  0%, 100% { box-shadow: 0 0 0 rgba(79, 70, 229, 0); }
+  50% { box-shadow: 0 0 20px rgba(79, 70, 229, 0.15); }
+}
+
+.animate-gentle-float {
+  animation: gentle-float 4s ease-in-out infinite;
+}
+
+.animate-soft-pulse {
+  animation: soft-pulse 3s ease-in-out infinite;
+}
+
+.animate-calm-glow {
+  animation: calm-glow 2s ease-in-out infinite;
+}
+
+/* Utility classes for the new color system */
+.text-primary-indigo {
+  color: var(--primary);
+}
+
+.bg-primary-indigo {
+  background-color: var(--primary);
+}
+
+.bg-success-mint {
+  background-color: var(--success);
+}
+
+.text-success-mint {
+  color: var(--success-dark);
+}
+
+.bg-warm-off-white {
+  background-color: var(--background);
+}
+
+.text-charcoal {
+  color: var(--foreground);
+}
+
+.text-muted-charcoal {
+  color: var(--muted);
 }
