@@ -6,8 +6,8 @@ Copy this content to create your `.env.local` file:
 # Supabase Configuration
 # Get these from: https://supabase.com/dashboard/project/frevfwjyyydorwqvwjmo/settings/api
 NEXT_PUBLIC_SUPABASE_URL=https://frevfwjyyydorwqvwjmo.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_secret_ACvmsg0KqwG-2kJprYi9kA_t4jshB6n
-SUPABASE_SERVICE_ROLE_KEY=sb_publishable_NC4Xb5S-XIAAV6HtagDjkw_yWrNUTt2
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key_here
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key_here
 
 # Stripe Configuration (Optional - for payments)
 # Get these from: https://dashboard.stripe.com/apikeys
