@@ -53,7 +53,6 @@ export default function Home() {
         typingIntervalRef.current = null
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
@@ -109,26 +108,26 @@ export default function Home() {
       <div className="absolute inset-0 opacity-[0.02] bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAzNGMwIDMuMzE0LTIuNjg2IDYtNiA2cy02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNiA2IDIuNjg2IDYgNnoiLz48L2c+PC9zdmc+')] pointer-events-none" />
       
       <nav className="bg-white/60 backdrop-blur-sm border-b border-[#E5E7EB] sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-          <h1 className="text-xl font-semibold text-[#1F2933] tracking-tight">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+          <h1 className="text-lg sm:text-xl font-semibold text-[#1F2933] tracking-tight">
             Dont Miss It
           </h1>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <Link
               href="/pricing"
-              className="text-sm text-[#6B7280] hover:text-[#1F2933] font-medium transition-colors"
+              className="text-xs sm:text-sm text-[#6B7280] hover:text-[#1F2933] font-medium transition-colors px-2 py-1"
             >
               Pricing
             </Link>
             <Link
               href="/login"
-              className="text-sm text-[#6B7280] hover:text-[#1F2933] font-medium transition-colors"
+              className="text-xs sm:text-sm text-[#6B7280] hover:text-[#1F2933] font-medium transition-colors px-2 py-1"
             >
               Sign in
             </Link>
             <Link
               href="/signup"
-              className="text-sm px-4 py-2 bg-[#4F46E5] text-white rounded-lg font-medium hover:bg-[#4338CA] transition-colors"
+              className="text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 bg-[#4F46E5] text-white rounded-lg font-medium hover:bg-[#4338CA] transition-colors"
             >
               Get started
             </Link>
@@ -136,28 +135,30 @@ export default function Home() {
         </div>
       </nav>
 
-      <main className="max-w-7xl mx-auto px-4 py-12 md:py-20 relative z-10">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 lg:py-20 relative z-10">
         {/* 1. INTERACTIVE HERO */}
-        <section className="grid md:grid-cols-2 gap-12 items-center mb-24">
+        <section className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center mb-16 md:mb-24">
           {/* Left: Text */}
-          <div>
-            <h1 className="text-4xl md:text-5xl font-semibold mb-4 text-[#1F2933] leading-tight">
+          <div className="order-2 md:order-1">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold mb-4 text-[#1F2933] leading-tight">
               One calm step at a time
             </h1>
-            <p className="text-lg text-[#6B7280] mb-6 leading-relaxed">
+            <p className="text-base sm:text-lg text-[#6B7280] mb-6 leading-relaxed">
               Anti-planner for everyone. Get one tiny step you can actually do.
             </p>
-            <Link
-              href="/signup"
-              className="inline-block px-6 py-3 bg-[#4F46E5] text-white rounded-lg font-semibold hover:bg-[#4338CA] transition-colors shadow-sm hover:shadow-md mb-2"
-            >
-              Try it once. No commitment.
-            </Link>
-            <p className="text-xs text-[#6B7280]">Takes ~60 seconds</p>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+              <Link
+                href="/signup"
+                className="inline-block px-6 py-3 bg-[#4F46E5] text-white rounded-lg font-semibold hover:bg-[#4338CA] transition-colors shadow-sm hover:shadow-md text-center"
+              >
+                Try it once. No commitment.
+              </Link>
+              <p className="text-xs text-[#6B7280] sm:ml-2">Takes ~60 seconds</p>
+            </div>
           </div>
 
           {/* Right: Interactive Demo */}
-          <div className="space-y-4">
+          <div className="space-y-4 order-1 md:order-2">
             <div className="bg-white rounded-xl p-4 border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-md relative">
               <label className="block text-sm font-medium text-[#6B7280] mb-2">Brain dump</label>
               <div className="relative">
@@ -258,20 +259,20 @@ export default function Home() {
         </section>
 
         {/* 2. ONE-LINE VALUE REINFORCEMENT */}
-        <section className="text-center mb-24">
-          <p className="text-xl text-[#1F2933] font-medium max-w-2xl mx-auto">
+        <section className="text-center mb-16 md:mb-24">
+          <p className="text-lg sm:text-xl text-[#1F2933] font-medium max-w-2xl mx-auto px-4">
             People don&apos;t buy planners. They buy relief from overwhelm.
           </p>
         </section>
 
         {/* 3. VISUAL PROOF OF PROBLEM */}
-        <section className="mb-24" ref={chartRef}>
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-semibold text-[#1F2933] mb-3">Why this exists</h2>
-            <p className="text-[#6B7280]">Focus is broken — and lists make it worse</p>
+        <section className="mb-16 md:mb-24" ref={chartRef}>
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-[#1F2933] mb-3">Why this exists</h2>
+            <p className="text-sm sm:text-base text-[#6B7280] px-4">Focus is broken — and lists make it worse</p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
             {/* Chart 1: Attention Fragmentation */}
             <div className="bg-white rounded-xl p-6 border border-[#E5E7EB] shadow-sm">
               <h3 className="text-sm font-semibold text-[#1F2933] mb-6">Attention Fragmentation</h3>
@@ -392,13 +393,13 @@ export default function Home() {
         </section>
 
         {/* 4. FEATURES AS DOPAMINE LOOPS */}
-        <section className="mb-24">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-semibold text-[#1F2933] mb-3">How it works</h2>
+        <section className="mb-16 md:mb-24">
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-[#1F2933] mb-3">How it works</h2>
           </div>
 
           {/* Feature 1: One Tile Focus */}
-          <div className="bg-white rounded-xl p-8 border border-[#E5E7EB] shadow-sm mb-8">
+          <div className="bg-white rounded-xl p-6 md:p-8 border border-[#E5E7EB] shadow-sm mb-6 md:mb-8">
             <div className="flex items-center gap-3 mb-4">
               <div className="text-2xl">🎯</div>
               <h3 className="text-xl font-semibold text-[#1F2933]">One Tile Focus</h3>
@@ -425,11 +426,11 @@ export default function Home() {
           </div>
 
           {/* Feature 2: Smart but Simple */}
-          <div className="bg-white rounded-xl p-8 border border-[#E5E7EB] shadow-sm mb-8">
+          <div className="bg-white rounded-xl p-6 md:p-8 border border-[#E5E7EB] shadow-sm mb-6 md:mb-8">
             <div className="flex items-center gap-3 mb-4">
               <div className="text-2xl">🧠</div>
-              <h3 className="text-xl font-semibold text-[#1F2933]">Smart but Simple</h3>
-        </div>
+              <h3 className="text-lg md:text-xl font-semibold text-[#1F2933]">Smart but Simple</h3>
+            </div>
             <div className="mb-4">
               <button
                 onClick={() => setFeatureToggle(featureToggle === 'before' ? 'after' : 'before')}
@@ -491,7 +492,7 @@ export default function Home() {
           </div>
 
           {/* Feature 3: Shame-free */}
-          <div className="bg-white rounded-xl p-8 border border-[#E5E7EB] shadow-sm">
+          <div className="bg-white rounded-xl p-6 md:p-8 border border-[#E5E7EB] shadow-sm">
             <div className="flex items-center gap-3 mb-4">
               <div className="text-2xl">✨</div>
               <h3 className="text-xl font-semibold text-[#1F2933]">Shame-free</h3>
@@ -521,12 +522,12 @@ export default function Home() {
         </section>
 
         {/* 5. BEHAVIORAL PROOF */}
-        <section className="mb-24">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl font-semibold text-[#1F2933] mb-2">What usually happens</h2>
-            <p className="text-[#6B7280]">Real behavior, not testimonials</p>
+        <section className="mb-16 md:mb-24">
+          <div className="text-center mb-6 md:mb-8">
+            <h2 className="text-xl sm:text-2xl font-semibold text-[#1F2933] mb-2">What usually happens</h2>
+            <p className="text-sm sm:text-base text-[#6B7280]">Real behavior, not testimonials</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
             <div className="bg-white rounded-xl p-6 border border-[#E5E7EB] shadow-sm text-center">
               <div className="text-3xl font-semibold text-[#4F46E5] mb-2">12 min</div>
               <p className="text-sm text-[#6B7280]">Most first steps take under 12 minutes</p>
@@ -543,16 +544,18 @@ export default function Home() {
         </section>
 
         {/* 6. LOW-PRESSURE CTA */}
-        <section className="bg-white rounded-2xl p-12 border border-[#E5E7EB] shadow-sm text-center">
-          <h2 className="text-3xl font-semibold text-[#1F2933] mb-4">Create one calm step</h2>
-          <p className="text-lg text-[#6B7280] mb-6">No card. No pressure.</p>
-          <Link
-            href="/signup"
-            className="inline-block px-8 py-4 bg-[#4F46E5] text-white rounded-lg font-semibold hover:bg-[#4338CA] transition-colors shadow-sm hover:shadow-md mb-2"
-          >
-            Try it once. No commitment.
-          </Link>
-          <p className="text-xs text-[#6B7280]">Takes ~60 seconds</p>
+        <section className="bg-white rounded-2xl p-8 md:p-12 border border-[#E5E7EB] shadow-sm text-center">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-[#1F2933] mb-4">Create one calm step</h2>
+          <p className="text-base sm:text-lg text-[#6B7280] mb-6">No card. No pressure.</p>
+          <div className="flex flex-col items-center gap-2">
+            <Link
+              href="/signup"
+              className="inline-block px-6 md:px-8 py-3 md:py-4 bg-[#4F46E5] text-white rounded-lg font-semibold hover:bg-[#4338CA] transition-colors shadow-sm hover:shadow-md"
+            >
+              Try it once. No commitment.
+            </Link>
+            <p className="text-xs text-[#6B7280]">Takes ~60 seconds</p>
+          </div>
         </section>
       </main>
     </div>
