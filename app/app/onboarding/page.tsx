@@ -52,7 +52,7 @@ export default function OnboardingPage() {
           .update({
             preferred_time_of_day: timeOfDay,
             preferred_minutes_default: stepSize || 15,
-          })
+          } as never)
           .eq('id', user.id)
 
         router.push('/app')

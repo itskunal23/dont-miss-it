@@ -70,7 +70,7 @@ export default function SettingsPage() {
     try {
       const { error } = await supabase
         .from('profiles')
-        .update({ [field]: value })
+        .update({ [field]: value } as never)
         .eq('id', profile.id)
 
       if (error) throw error

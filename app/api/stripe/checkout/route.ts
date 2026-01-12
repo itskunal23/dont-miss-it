@@ -31,7 +31,8 @@ export async function POST(request: NextRequest) {
       .eq('user_id', user.id)
       .single()
 
-    let customerId = subscription?.stripe_customer_id
+    const subscriptionData = subscription as { stripe_customer_id?: string } | null
+    let customerId = subscriptionData?.stripe_customer_id
 
     if (!customerId) {
       const customer = await stripe.customers.create({

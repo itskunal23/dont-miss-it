@@ -23,6 +23,8 @@ export default async function AppLayout({
     .eq('id', user.id)
     .single()
 
+  const profileData = profile as { plan?: 'free' | 'pro' } | null
+
   return (
     <div className="min-h-screen bg-[#FAFAF9]">
       <nav className="bg-white/80 backdrop-blur-sm border-b border-[#E5E7EB] sticky top-0 z-50">
@@ -49,7 +51,7 @@ export default async function AppLayout({
             >
               Settings
             </Link>
-            {profile?.plan === 'free' && (
+            {profileData?.plan === 'free' && (
               <Link
                 href="/pricing"
                 className="text-sm px-3 py-1.5 bg-[#4F46E5] text-white rounded-lg font-medium hover:bg-[#4338CA] transition-colors"

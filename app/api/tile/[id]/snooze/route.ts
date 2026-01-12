@@ -33,7 +33,15 @@ export async function POST(
       return NextResponse.json({ error: 'Tile not found' }, { status: 404 })
     }
 
-    if (tile.status !== 'active') {
+    const tileData = tile as { 
+      status: string
+      snooze_count: number
+    } | null
+    if (!tileData) {
+      return NextResponse.json({ error: 'Tile not found' }, { status: 404 })
+    }
+
+    if (tileData.status !== 'active') {
       return NextResponse.json({ error: 'Tile is not active' }, { status: 400 })
     }
 
@@ -59,13 +67,12 @@ export async function POST(
         break
     }
 
-    // Update tile: increment snooze count, update last_presented_at
     const { data: updatedTile, error: updateError } = await supabase
       .from('tiles')
       .update({
-        snooze_count: tile.snooze_count + 1,
+        snooze_count: tileData.snooze_count + 1,
         last_presented_at: nextPresentAt.toISOString(),
-      })
+      } as never)
       .eq('id', id)
       .select()
       .single()
@@ -76,20 +83,23 @@ export async function POST(
     }
 
     // Log event
-    await supabase.from('events').insert({
-      user_id: user.id,
-      event_name: 'tile_snoozed',
-      metadata: {
-        tile_id: id,
-        duration: validated.duration,
-        snooze_count: updatedTile.snooze_count,
-      },
-    })
+    const updatedTileData = updatedTile as { snooze_count: number } | null
+    if (updatedTileData) {
+      await supabase.from('events').insert({
+        user_id: user.id,
+        event_name: 'tile_snoozed',
+        metadata: {
+          tile_id: id,
+          duration: validated.duration,
+          snooze_count: updatedTileData.snooze_count,
+        },
+      } as never)
+    }
 
     return NextResponse.json({ tile: updatedTile })
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: error.errors }, { status: 400 })
+      return NextResponse.json({ error: error.issues }, { status: 400 })
     }
     console.error('Unexpected error:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })

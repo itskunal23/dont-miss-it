@@ -45,12 +45,12 @@ export async function POST(request: NextRequest) {
           stripe_subscription_id: subscription.id,
           status: subscription.status,
           current_period_end: new Date((subscription as any).current_period_end * 1000).toISOString(),
-        } as any)
+        } as never)
 
         // Update profile to pro
         await supabase
           .from('profiles')
-          .update({ plan: 'pro' })
+          .update({ plan: 'pro' } as never)
           .eq('id', userId)
 
         break
@@ -77,13 +77,13 @@ export async function POST(request: NextRequest) {
             .update({
               status: subscription.status,
               current_period_end: new Date((subscription as any).current_period_end * 1000).toISOString(),
-            } as any)
-            .eq('user_id', subRecord.user_id)
+            } as never)
+            .eq('user_id', (subRecord as { user_id: string }).user_id)
 
           await supabase
             .from('profiles')
-            .update({ plan: 'pro' } as any)
-            .eq('id', subRecord.user_id)
+            .update({ plan: 'pro' } as never)
+            .eq('id', (subRecord as { user_id: string }).user_id)
         } else {
           // Downgrade to free
           await supabase
@@ -91,13 +91,13 @@ export async function POST(request: NextRequest) {
             .update({
               status: subscription.status,
               current_period_end: new Date((subscription as any).current_period_end * 1000).toISOString(),
-            } as any)
-            .eq('user_id', subRecord.user_id)
+            } as never)
+            .eq('user_id', (subRecord as { user_id: string }).user_id)
 
           await supabase
             .from('profiles')
-            .update({ plan: 'free' } as any)
-            .eq('id', subRecord.user_id)
+            .update({ plan: 'free' } as never)
+            .eq('id', (subRecord as { user_id: string }).user_id)
         }
 
         break

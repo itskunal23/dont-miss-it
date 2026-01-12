@@ -43,7 +43,8 @@ export async function POST(request: NextRequest) {
       .eq('id', user.id)
       .single()
 
-    if (!profile || profile.plan !== 'pro') {
+    const profileData = profile as { plan: 'free' | 'pro' } | null
+    if (!profileData || profileData.plan !== 'pro') {
       return NextResponse.json(
         { error: 'Smart Assist is only available for Pro users' },
         { status: 403 }
@@ -86,8 +87,9 @@ export async function POST(request: NextRequest) {
       .eq('metadata->>cache_key', cacheKey)
       .single()
 
-    if (cached && cached.metadata && typeof cached.metadata === 'object' && 'response' in cached.metadata) {
-      return NextResponse.json(cached.metadata.response as OllamaResponse)
+    const cachedData = cached as { metadata?: { cache_key?: string; response?: OllamaResponse } } | null
+    if (cachedData && cachedData.metadata && cachedData.metadata.response) {
+      return NextResponse.json(cachedData.metadata.response)
     }
 
     // Call Ollama
@@ -159,7 +161,7 @@ Return ONLY valid JSON matching this exact schema (no extra text, no markdown):
         cache_key: cacheKey,
         response: parsed,
       },
-    })
+    } as never)
 
     // Log usage
     await supabase.from('events').insert({
@@ -168,12 +170,12 @@ Return ONLY valid JSON matching this exact schema (no extra text, no markdown):
       metadata: {
         raw_text_length: validated.raw_text.length,
       },
-    })
+    } as never)
 
     return NextResponse.json(parsed)
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: error.errors }, { status: 400 })
+      return NextResponse.json({ error: error.issues }, { status: 400 })
     }
     console.error('AI assist error:', error)
     return NextResponse.json(

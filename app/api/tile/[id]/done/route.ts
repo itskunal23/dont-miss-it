@@ -34,7 +34,7 @@ export async function POST(
       .update({
         status: 'done',
         updated_at: new Date().toISOString(),
-      })
+      } as never)
       .eq('id', id)
       .select()
       .single()
@@ -54,26 +54,30 @@ export async function POST(
       .limit(1)
       .single()
 
-    if (nextTile) {
+    const nextTileData = nextTile as { id: string } | null
+    if (nextTileData) {
       await supabase
         .from('tiles')
         .update({
           status: 'active',
           last_presented_at: new Date().toISOString(),
-        })
-        .eq('id', nextTile.id)
+        } as never)
+        .eq('id', nextTileData.id)
     }
 
     // Log event
-    await supabase.from('events').insert({
-      user_id: user.id,
-      event_name: 'tile_completed',
-      metadata: {
-        tile_id: id,
-        minutes: tile.minutes,
-        category: tile.category,
-      },
-    })
+    const tileData = tile as { minutes: number; category: string } | null
+    if (tileData) {
+      await supabase.from('events').insert({
+        user_id: user.id,
+        event_name: 'tile_completed',
+        metadata: {
+          tile_id: id,
+          minutes: tileData.minutes,
+          category: tileData.category,
+        },
+      } as never)
+    }
 
     return NextResponse.json({
       tile: updatedTile,

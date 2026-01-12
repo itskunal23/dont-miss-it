@@ -36,7 +36,7 @@ export default function SignupPage() {
             preferred_minutes_default: 15,
             energy_default: 'normal',
             timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-          })
+          } as never)
 
         if (profileError) {
           console.error('Profile creation error:', profileError)

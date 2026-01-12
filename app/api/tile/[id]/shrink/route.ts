@@ -29,18 +29,29 @@ export async function POST(
       return NextResponse.json({ error: 'Tile not found' }, { status: 404 })
     }
 
-    if (tile.status !== 'active') {
+    // Apply anti-avoidance to make step smaller
+    const tileData = tile as { 
+      status: string
+      next_step: string
+      minutes: number
+      difficulty: 'low' | 'med' | 'high'
+      snooze_count: number
+    } | null
+    if (!tileData) {
+      return NextResponse.json({ error: 'Tile not found' }, { status: 404 })
+    }
+
+    if (tileData.status !== 'active') {
       return NextResponse.json({ error: 'Tile is not active' }, { status: 400 })
     }
 
-    // Apply anti-avoidance to make step smaller
     const smallerStep = applyAntiAvoidance(
       {
-        next_step: tile.next_step,
-        minutes: tile.minutes,
-        difficulty: tile.difficulty,
+        next_step: tileData.next_step,
+        minutes: tileData.minutes,
+        difficulty: tileData.difficulty,
       },
-      tile.snooze_count + 1 // Treat as if snoozed once more
+      tileData.snooze_count + 1 // Treat as if snoozed once more
     )
 
     // Update tile
@@ -50,9 +61,9 @@ export async function POST(
         next_step: smallerStep.next_step,
         minutes: smallerStep.minutes,
         difficulty: smallerStep.difficulty,
-        snooze_count: tile.snooze_count + 1,
+        snooze_count: tileData.snooze_count + 1,
         updated_at: new Date().toISOString(),
-      })
+      } as never)
       .eq('id', id)
       .select()
       .single()
@@ -68,10 +79,10 @@ export async function POST(
       event_name: 'tile_shrunk',
       metadata: {
         tile_id: id,
-        old_minutes: tile.minutes,
+        old_minutes: tileData.minutes,
         new_minutes: smallerStep.minutes,
       },
-    })
+    } as never)
 
     return NextResponse.json({ tile: updatedTile })
   } catch (error) {

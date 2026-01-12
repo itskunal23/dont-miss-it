@@ -30,8 +30,18 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Profile not found' }, { status: 404 })
     }
 
+    const profileData = profile as { 
+      plan: 'free' | 'pro'
+      preferred_minutes_default: number
+      energy_default: 'low' | 'normal' | 'high'
+      timezone: string | null
+    } | null
+    if (!profileData) {
+      return NextResponse.json({ error: 'Profile not found' }, { status: 404 })
+    }
+
     // Check free tier limit (25 captures/month)
-    if (profile.plan === 'free') {
+    if (profileData.plan === 'free') {
       const startOfMonth = new Date()
       startOfMonth.setDate(1)
       startOfMonth.setHours(0, 0, 0, 0)
@@ -61,12 +71,17 @@ export async function POST(request: NextRequest) {
         user_id: user.id,
         raw_text: validated.raw_text,
         source: validated.source,
-      })
+      } as never)
       .select()
       .single()
 
-    if (captureError) {
+    if (captureError || !capture) {
       console.error('Capture creation error:', captureError)
+      return NextResponse.json({ error: 'Failed to create capture' }, { status: 500 })
+    }
+
+    const captureData = capture as { id: string } | null
+    if (!captureData) {
       return NextResponse.json({ error: 'Failed to create capture' }, { status: 500 })
     }
 
@@ -82,16 +97,16 @@ export async function POST(request: NextRequest) {
     let tileData = processCapture({
       raw_text: validated.raw_text,
       user_id: user.id,
-      preferred_minutes: profile.preferred_minutes_default,
-      energy_mode: profile.energy_default,
-      timezone: profile.timezone || 'UTC',
+      preferred_minutes: profileData.preferred_minutes_default,
+      energy_mode: profileData.energy_default,
+      timezone: profileData.timezone || 'UTC',
       snooze_count: 0,
     })
 
     // If confidence is low and user is Pro, try Ollama Smart Assist
     if (
       tileData.confidence < 0.6 &&
-      profile.plan === 'pro' &&
+      profileData.plan === 'pro' &&
       process.env.ENABLE_OLLAMA_ASSIST === 'true'
     ) {
       try {
@@ -129,7 +144,7 @@ export async function POST(request: NextRequest) {
       .from('tiles')
       .insert({
         user_id: user.id,
-        capture_id: capture.id,
+        capture_id: captureData.id,
         title: tileData.title,
         next_step: tileData.next_step,
         minutes: tileData.minutes,
@@ -139,7 +154,7 @@ export async function POST(request: NextRequest) {
         status,
         snooze_count: 0,
         last_presented_at: status === 'active' ? new Date().toISOString() : null,
-      })
+      } as never)
       .select()
       .single()
 
@@ -149,27 +164,31 @@ export async function POST(request: NextRequest) {
     }
 
     // Log event
-    await supabase.from('events').insert({
-      user_id: user.id,
-      event_name: 'capture_created',
-      metadata: {
-        capture_id: capture.id,
-        tile_id: tile.id,
-        status,
-        confidence: tileData.confidence,
-      },
-    })
+    const tileData2 = tile as { id: string } | null
+    if (tileData2) {
+      await supabase.from('events').insert({
+        user_id: user.id,
+        event_name: 'capture_created',
+        metadata: {
+          capture_id: captureData.id,
+          tile_id: tileData2.id,
+          status,
+          confidence: tileData.confidence,
+        },
+      } as never)
+    }
 
+    const tileResponse = tile as { id: string; [key: string]: any } | null
     return NextResponse.json({
-      capture,
-      tile: {
-        ...tile,
+      capture: captureData,
+      tile: tileResponse ? {
+        ...tileResponse,
         swap_options: tileData.swap_options,
-      },
+      } : null,
     })
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: error.errors }, { status: 400 })
+      return NextResponse.json({ error: error.issues }, { status: 400 })
     }
     console.error('Unexpected error:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
