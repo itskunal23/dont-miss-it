@@ -19,33 +19,31 @@ export default function Home() {
   useEffect(() => {
     // Auto-demo after 2 seconds if no interaction
     const timer = setTimeout(() => {
-      if (!demoText && !isTyping) {
-        setIsTyping(true)
-        let currentIndex = 0
-        
-        typingIntervalRef.current = setInterval(() => {
-          if (currentIndex < demoTextFull.length) {
-            setDemoText(demoTextFull.slice(0, currentIndex + 1))
-            currentIndex++
-          } else {
-            if (typingIntervalRef.current) {
-              clearInterval(typingIntervalRef.current)
-              typingIntervalRef.current = null
-            }
-            setIsTyping(false)
-            // Show arrow after typing completes
-            setTimeout(() => {
-              setShowArrow(true)
-              // Show tile after arrow appears
-              setTimeout(() => {
-                setTileAnimationStage('entering')
-                setTimeout(() => setTileAnimationStage('visible'), 100)
-                setShowTile(true)
-              }, 600)
-            }, 500)
+      setIsTyping(true)
+      let currentIndex = 0
+      
+      typingIntervalRef.current = setInterval(() => {
+        if (currentIndex < demoTextFull.length) {
+          setDemoText(demoTextFull.slice(0, currentIndex + 1))
+          currentIndex++
+        } else {
+          if (typingIntervalRef.current) {
+            clearInterval(typingIntervalRef.current)
+            typingIntervalRef.current = null
           }
-        }, 50) // Typing speed
-      }
+          setIsTyping(false)
+          // Show arrow after typing completes
+          setTimeout(() => {
+            setShowArrow(true)
+            // Show tile after arrow appears
+            setTimeout(() => {
+              setTileAnimationStage('entering')
+              setTimeout(() => setTileAnimationStage('visible'), 100)
+              setShowTile(true)
+            }, 600)
+          }, 500)
+        }
+      }, 50) // Typing speed
     }, 2000)
 
     return () => {
@@ -55,6 +53,7 @@ export default function Home() {
         typingIntervalRef.current = null
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
