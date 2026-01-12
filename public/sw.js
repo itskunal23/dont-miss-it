@@ -1,5 +1,5 @@
 // Service Worker for Dont Miss It PWA
-const CACHE_NAME = 'dont-miss-it-v1'
+const CACHE_NAME = 'dont-miss-it-v2'
 const urlsToCache = [
   '/',
   '/app',
@@ -19,6 +19,12 @@ self.addEventListener('install', (event) => {
 
 // Fetch event
 self.addEventListener('fetch', (event) => {
+  // Skip cache for root page to always get latest version
+  if (event.request.url.includes('/') && event.request.url.endsWith('/')) {
+    event.respondWith(fetch(event.request))
+    return
+  }
+  
   event.respondWith(
     caches.match(event.request).then((response) => {
       // Return cached version or fetch from network
