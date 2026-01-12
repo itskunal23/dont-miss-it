@@ -2,9 +2,16 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabaseServer'
 import Stripe from 'stripe'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-12-15.clover',
-})
+// Lazy initialization - only create Stripe client when needed
+function getStripe() {
+  const secretKey = process.env.STRIPE_SECRET_KEY
+  if (!secretKey) {
+    throw new Error('STRIPE_SECRET_KEY is not configured')
+  }
+  return new Stripe(secretKey, {
+    apiVersion: '2025-12-15.clover',
+  })
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -34,6 +41,8 @@ export async function POST(request: NextRequest) {
     const subscriptionData = subscription as { stripe_customer_id?: string } | null
     let customerId = subscriptionData?.stripe_customer_id
 
+    const stripe = getStripe()
+    
     if (!customerId) {
       const customer = await stripe.customers.create({
         email: user.email,
