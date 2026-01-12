@@ -1,74 +1,79 @@
 <div align="center">
 
-✅ **Dont Miss It**  
-the anti-planner that turns overwhelm into one calm next step  
+## Dont Miss It
 
-No guilt. No noise. Just progress.  
+**The anti-planner that turns overwhelm into one calm next step.**  
+Enterprise-ready, privacy-first, and built for real human workloads.
 
-Built by Kunal.
-
-<br />
-<br />
-
-What it is • How it works • Why it works (proof) • Quick start • Pro
+No guilt. No noise. Measurable progress.
 
 </div>
 
 ---
 
-## ✨ What it is
+## 1. Overview
 
-Dont Miss It is a mobile-first PWA that takes your brain dump and gives you **one tiny step you can do in 10–20 minutes**.
+**Dont Miss It** is a mobile-first, production-ready PWA that transforms unstructured “brain dumps” into **one actionable step you can complete in 10–20 minutes**.
 
-Not a to-do list.  
-Not another productivity guilt machine.  
-**Just one tile → one step → momentum.**
+- Instead of long backlogs, you see **one active tile**.
+- Instead of nudging users with guilt, it **shrinks work** when avoidance patterns show up.
+- Instead of opaque AI, it ships with a **deterministic rules engine**, plus **optional server-side AI (Ollama)** for messy inputs.
+
+This makes it suitable both as:
+- A **consumer-facing product** for overwhelmed knowledge workers and students.
+- A **reference implementation** for teams exploring calm, behaviorally-informed productivity tools.
 
 ---
 
-## 🧠 How it works
+## 2. How it works
 
-### 1) Brain dump (messy is fine)
+### 2.1 Brain dump
 
-Type anything like:
+Users can enter anything, in any order, for example:
 
 > “Reply to Sarah, pay electric bill by Friday, study for chem exam”
 
-### 2) It converts chaos → ONE TILE
+### 2.2 From chaos → one tile
+
+The app parses the text, classifies intent, detects deadlines, and surfaces **one “next step” tile**:
 
 ```
 ┌───────────────────────────────────────────────┐
-│  ONE TILE (your only visible task)           │
-│                                              │
-│  📧 Reply to Sarah                           │
-│  Next step: Open the thread and write 1 line.│
-│                                              │
-│  ⏱️ 10 min   📅 Due: Friday   🟢 Low effort   │
-│                                              │
-│  [Start] [Snooze] [Make smaller] [Done]      │
+│  ONE TILE (single visible task)               │
+│                                               │
+│  📧 Reply to Sarah                            │
+│  Next step: Open the thread and write 1 line. │
+│                                               │
+│  ⏱️ 10 min   📅 Due: Friday   🟢 Low effort  │
+│                                               │
+│  [Start] [Snooze] [Make smaller] [Done]       │
 └───────────────────────────────────────────────┘
 ```
 
-Everything else goes into a **quiet queue** you don’t have to look at.
+All other derived tasks quietly move into a **queue**—accessible, but not demanding attention.
 
-### 3) Anti-avoidance (this is the magic)
+### 2.3 Anti-avoidance logic
 
-If you snooze repeatedly, the step **auto-shrinks**:
+If a user keeps snoozing the same tile, the system automatically **reduces activation energy**:
 
-- Snooze 0 → normal step  
-- Snooze 2 → setup-only step  
-- Snooze 4+ → “just open it” step  
+- **Snooze 0** → normal step  
+- **Snooze 2** → “setup-only” step (e.g., open the doc, locate section)  
+- **Snooze 4+** → “just open it” step  
 
-Because starting is the hardest part.
+This mirrors evidence-based behavior design: make the first action trivially small to unlock momentum.
 
 ---
 
-## 📌 Why it works (proof)
+## 3. Why it works (backed by research)
 
-Modern life is an interruption machine:
+The product is designed around well-documented realities:
 
-- Microsoft’s research on the “infinite workday” reports people using Microsoft 365 are interrupted extremely frequently (about every couple minutes) by meetings, email, or notifications—**fragmenting focus**.
-- Cognitive psychology consistently finds **task switching has real performance costs** that grow with complexity.
-- “Implementation intentions” (pre-deciding the when/where/how of a tiny action) have been shown to **meaningfully improve follow-through** in experimental work.
-- Gen Z and young adults report **heavy stress burdens** (money, isolation, life pressure)—which correlates with overwhelm and avoidance.
+- **Interruptions & context switching:** Microsoft’s research on the “infinite workday” shows knowledge workers are interrupted every few minutes, fragmenting focus and extending work hours.
+- **Switching costs:** Cognitive psychology consistently finds that task switching carries **non-trivial performance penalties**, especially for complex work.
+- **Implementation intentions:** Pre-committing to a specific, small next action improves follow-through rates in controlled studies.
+- **Stress & overwhelm (especially Gen Z / young adults):** High reported stress correlates with avoidance and shutdown, not with “doing more planning”.
 
+**Dont Miss It** is built to:
+- Reduce decision load (one tile, not dozens).
+- Reduce friction to start (micro-steps).
+- Remove shame from the loop (no “you failed” language, only “let’s make it smaller”).
