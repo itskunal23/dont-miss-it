@@ -103,25 +103,23 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FAFAF9] relative overflow-hidden">
-      {/* Subtle texture overlay */}
-      <div className="absolute inset-0 opacity-[0.02] bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAzNGMwIDMuMzE0LTIuNjg2IDYtNiA2cy02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNiA2IDIuNjg2IDYgNnoiLz48L2c+PC9zdmc+')] pointer-events-none" />
+    <div className="min-h-screen bg-white relative overflow-hidden">
       
-      <nav className="bg-white/60 backdrop-blur-sm border-b border-[#E5E7EB] sticky top-0 z-50">
+      <nav className="bg-white border-b border-[#E5E7EB] sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-          <h1 className="text-lg sm:text-xl font-semibold text-[#1F2933] tracking-tight">
+          <h1 className="text-lg sm:text-xl font-semibold text-black tracking-tight">
             Dont Miss It
           </h1>
           <div className="flex items-center gap-2 sm:gap-4">
             <Link
               href="/pricing"
-              className="text-xs sm:text-sm text-[#6B7280] hover:text-[#1F2933] font-medium transition-colors px-2 py-1"
+              className="text-xs sm:text-sm text-black hover:text-black/80 font-medium transition-colors px-2 py-1"
             >
               Pricing
             </Link>
             <Link
               href="/login"
-              className="text-xs sm:text-sm text-[#6B7280] hover:text-[#1F2933] font-medium transition-colors px-2 py-1"
+              className="text-xs sm:text-sm text-black hover:text-black/80 font-medium transition-colors px-2 py-1"
             >
               Sign in
             </Link>
@@ -140,10 +138,10 @@ export default function Home() {
         <section className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center mb-16 md:mb-24">
           {/* Left: Text */}
           <div className="order-2 md:order-1">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold mb-4 text-[#1F2933] leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold mb-4 text-black leading-tight">
               One calm step at a time
             </h1>
-            <p className="text-base sm:text-lg text-[#6B7280] mb-6 leading-relaxed">
+            <p className="text-base sm:text-lg text-black/70 mb-6 leading-relaxed">
               Anti-planner for everyone. Get one tiny step you can actually do.
             </p>
             <div className="flex flex-col sm:flex-row sm:items-center gap-2">
@@ -153,21 +151,21 @@ export default function Home() {
               >
                 Try it once. No commitment.
               </Link>
-              <p className="text-xs text-[#6B7280] sm:ml-2">Takes ~60 seconds</p>
+              <p className="text-xs text-black/60 sm:ml-2">Takes ~60 seconds</p>
             </div>
           </div>
 
           {/* Right: Interactive Demo */}
           <div className="space-y-4 order-1 md:order-2">
             <div className="bg-white rounded-xl p-4 border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-md relative">
-              <label className="block text-sm font-medium text-[#6B7280] mb-2">Brain dump</label>
+              <label className="block text-sm font-medium text-black mb-2">Brain dump</label>
               <div className="relative">
                 <textarea
                   value={demoText}
                   onChange={handleDemoInput}
                   placeholder="Reply to email, pay bill, study..."
                   rows={3}
-                  className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5] resize-none text-[#1F2933] placeholder:text-[#9CA3AF] transition-all duration-200"
+                  className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5] resize-none text-black placeholder:text-black/40 transition-all duration-200"
                 />
                 {isTyping && (
                   <span className="absolute bottom-3 left-3 text-[#4F46E5] animate-pulse font-mono">|</span>
@@ -215,7 +213,7 @@ export default function Home() {
                 
                 {/* Title - appears second */}
                 <h3 
-                  className="text-lg font-semibold text-[#1F2933] mb-2"
+                  className="text-lg font-semibold text-black mb-2"
                   style={{
                     animation: tileAnimationStage === 'visible' ? 'fadeInUp 0.4s ease-out 0.2s both' : undefined
                   }}
@@ -225,7 +223,7 @@ export default function Home() {
                 
                 {/* Next step - appears third */}
                 <p 
-                  className="text-sm text-[#6B7280] mb-4"
+                  className="text-sm text-black/70 mb-4"
                   style={{
                     animation: tileAnimationStage === 'visible' ? 'fadeInUp 0.4s ease-out 0.3s both' : undefined
                   }}
@@ -241,7 +239,7 @@ export default function Home() {
                   }}
                 >
                   <span className="px-2.5 py-1 bg-[#4F46E5]/10 text-[#4F46E5] rounded-md text-xs font-medium">⏱️ 10 min</span>
-                  <span className="px-2.5 py-1 bg-[#F8FAFC] text-[#6B7280] rounded-md text-xs">work</span>
+                  <span className="px-2.5 py-1 bg-gray-100 text-black rounded-md text-xs">work</span>
                 </div>
                 
                 {/* Button - appears last */}
@@ -260,7 +258,7 @@ export default function Home() {
 
         {/* 2. ONE-LINE VALUE REINFORCEMENT */}
         <section className="text-center mb-16 md:mb-24">
-          <p className="text-lg sm:text-xl text-[#1F2933] font-medium max-w-2xl mx-auto px-4">
+          <p className="text-lg sm:text-xl text-black font-medium max-w-2xl mx-auto px-4">
             People don&apos;t buy planners. They buy relief from overwhelm.
           </p>
         </section>
@@ -268,17 +266,17 @@ export default function Home() {
         {/* 3. VISUAL PROOF OF PROBLEM */}
         <section className="mb-16 md:mb-24" ref={chartRef}>
           <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-2xl sm:text-3xl font-semibold text-[#1F2933] mb-3">Why this exists</h2>
-            <p className="text-sm sm:text-base text-[#6B7280] px-4">Focus is broken — and lists make it worse</p>
+            <h2 className="text-2xl sm:text-3xl font-semibold text-black mb-3">Why this exists</h2>
+            <p className="text-sm sm:text-base text-black/70 px-4">Focus is broken — and lists make it worse</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 md:gap-8">
             {/* Chart 1: Attention Fragmentation */}
             <div className="bg-white rounded-xl p-6 border border-[#E5E7EB] shadow-sm">
-              <h3 className="text-sm font-semibold text-[#1F2933] mb-6">Attention Fragmentation</h3>
+              <h3 className="text-sm font-semibold text-black mb-6">Attention Fragmentation</h3>
               <div className="space-y-4">
                 <div>
-                  <div className="flex justify-between text-xs text-[#6B7280] mb-1">
+                  <div className="flex justify-between text-xs text-black/70 mb-1">
                     <span>Deep focus time</span>
                     <span className="font-medium">23 min/day</span>
                   </div>
@@ -289,7 +287,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div>
-                  <div className="flex justify-between text-xs text-[#6B7280] mb-1">
+                  <div className="flex justify-between text-xs text-black/70 mb-1">
                     <span>Interruptions per day</span>
                     <span className="font-medium">87</span>
                   </div>
@@ -300,7 +298,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div>
-                  <div className="flex justify-between text-xs text-[#6B7280] mb-1">
+                  <div className="flex justify-between text-xs text-black/70 mb-1">
                     <span>Unfinished tasks</span>
                     <span className="font-medium">12 avg</span>
                   </div>
@@ -311,14 +309,14 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <p className="text-xs text-[#6B7280] mt-4 leading-relaxed">
+              <p className="text-xs text-black/70 mt-4 leading-relaxed">
                 Modern work breaks focus into tiny fragments — long task lists increase avoidance.
               </p>
             </div>
 
             {/* Chart 2: Why People Procrastinate */}
             <div className="bg-white rounded-xl p-6 border border-[#E5E7EB] shadow-sm">
-              <h3 className="text-sm font-semibold text-[#1F2933] mb-6">Why people procrastinate</h3>
+              <h3 className="text-sm font-semibold text-black mb-6">Why people procrastinate</h3>
               <div className="relative w-48 h-48 mx-auto mb-4">
                 <svg viewBox="0 0 100 100" className="transform -rotate-90">
                   {/* Donut chart segments */}
@@ -366,26 +364,26 @@ export default function Home() {
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
-                    <div className="text-2xl font-semibold text-[#1F2933]">55%</div>
-                    <div className="text-xs text-[#6B7280]">Don&apos;t know where to start</div>
+                    <div className="text-2xl font-semibold text-black">55%</div>
+                    <div className="text-xs text-black/70">Don&apos;t know where to start</div>
                   </div>
                 </div>
               </div>
               <div className="space-y-2 text-xs">
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded-full bg-[#4F46E5]"></div>
-                  <span className="text-[#6B7280]">Don&apos;t know where to start (55%)</span>
+                  <span className="text-black/70">Don&apos;t know where to start (55%)</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded-full bg-[#FCA5A5]"></div>
-                  <span className="text-[#6B7280]">Overwhelm (25%)</span>
+                  <span className="text-black/70">Overwhelm (25%)</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded-full bg-[#FDE68A]"></div>
-                  <span className="text-[#6B7280]">Fear of doing it wrong (20%)</span>
+                  <span className="text-black/70">Fear of doing it wrong (20%)</span>
                 </div>
               </div>
-              <p className="text-xs text-[#6B7280] mt-4 leading-relaxed">
+              <p className="text-xs text-black/70 mt-4 leading-relaxed">
                 Most people don&apos;t procrastinate because they&apos;re lazy — they&apos;re overloaded.
               </p>
             </div>
@@ -395,16 +393,16 @@ export default function Home() {
         {/* 4. FEATURES AS DOPAMINE LOOPS */}
         <section className="mb-16 md:mb-24">
           <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-2xl sm:text-3xl font-semibold text-[#1F2933] mb-3">How it works</h2>
+            <h2 className="text-2xl sm:text-3xl font-semibold text-black mb-3">How it works</h2>
           </div>
 
           {/* Feature 1: One Tile Focus */}
           <div className="bg-white rounded-xl p-6 md:p-8 border border-[#E5E7EB] shadow-sm mb-6 md:mb-8">
             <div className="flex items-center gap-3 mb-4">
               <div className="text-2xl">🎯</div>
-              <h3 className="text-xl font-semibold text-[#1F2933]">One Tile Focus</h3>
+              <h3 className="text-xl font-semibold text-black">One Tile Focus</h3>
             </div>
-            <div className="relative h-32 bg-[#FAFAF9] rounded-lg overflow-hidden">
+            <div className="relative h-32 bg-gray-50 rounded-lg overflow-hidden">
               {/* Multiple blurred tasks */}
               <div className="absolute inset-0 flex items-center justify-center gap-4">
                 <div className="w-24 h-20 bg-white/50 backdrop-blur-sm rounded-lg border border-[#E5E7EB] opacity-40 transform translate-x-8"></div>
@@ -415,12 +413,12 @@ export default function Home() {
                 <div className="w-32 h-24 bg-white rounded-lg border-2 border-[#4F46E5] shadow-md animate-gentle-float">
                   <div className="p-3">
                     <div className="text-xs font-semibold text-[#4F46E5] mb-1">ONE TILE</div>
-                    <div className="text-sm font-medium text-[#1F2933]">Reply to email</div>
+                    <div className="text-sm font-medium text-black">Reply to email</div>
                   </div>
                 </div>
               </div>
             </div>
-            <p className="text-[#6B7280] mt-4 leading-relaxed">
+            <p className="text-black/70 mt-4 leading-relaxed">
               Your brain only sees one thing. That&apos;s the point.
             </p>
           </div>
@@ -429,12 +427,12 @@ export default function Home() {
           <div className="bg-white rounded-xl p-6 md:p-8 border border-[#E5E7EB] shadow-sm mb-6 md:mb-8">
             <div className="flex items-center gap-3 mb-4">
               <div className="text-2xl">🧠</div>
-              <h3 className="text-lg md:text-xl font-semibold text-[#1F2933]">Smart but Simple</h3>
+              <h3 className="text-lg md:text-xl font-semibold text-black">Smart but Simple</h3>
             </div>
             <div className="mb-4">
               <button
                 onClick={() => setFeatureToggle(featureToggle === 'before' ? 'after' : 'before')}
-                className="px-4 py-2 bg-[#F8FAFC] border border-[#E5E7EB] rounded-lg text-sm font-medium text-[#1F2933] hover:bg-white transition-colors"
+                className="px-4 py-2 bg-gray-100 border border-[#E5E7EB] rounded-lg text-sm font-medium text-black hover:bg-white transition-colors"
               >
                 {featureToggle === 'before' ? 'Before' : 'After'} →
               </button>
@@ -444,24 +442,24 @@ export default function Home() {
                 <>
                   <div className="space-y-2">
                     <div className="h-16 bg-[#FCA5A5]/20 rounded-lg border border-[#FCA5A5]/30 flex items-center justify-center">
-                      <span className="text-xs text-[#6B7280]">Messy notes</span>
+                      <span className="text-xs text-black/70">Messy notes</span>
                     </div>
                     <div className="h-16 bg-[#FCA5A5]/20 rounded-lg border border-[#FCA5A5]/30 flex items-center justify-center">
-                      <span className="text-xs text-[#6B7280]">Open tabs</span>
+                      <span className="text-xs text-black/70">Open tabs</span>
                     </div>
                     <div className="h-16 bg-[#FCA5A5]/20 rounded-lg border border-[#FCA5A5]/30 flex items-center justify-center">
-                      <span className="text-xs text-[#6B7280]">😰 Anxiety</span>
+                      <span className="text-xs text-black/70">😰 Anxiety</span>
                     </div>
                   </div>
                   <div className="space-y-2">
                     <div className="h-16 bg-[#FCA5A5]/20 rounded-lg border border-[#FCA5A5]/30 flex items-center justify-center">
-                      <span className="text-xs text-[#6B7280]">Decisions</span>
+                      <span className="text-xs text-black/70">Decisions</span>
                     </div>
                     <div className="h-16 bg-[#FCA5A5]/20 rounded-lg border border-[#FCA5A5]/30 flex items-center justify-center">
-                      <span className="text-xs text-[#6B7280]">Pressure</span>
+                      <span className="text-xs text-black/70">Pressure</span>
                     </div>
                     <div className="h-16 bg-[#FCA5A5]/20 rounded-lg border border-[#FCA5A5]/30 flex items-center justify-center">
-                      <span className="text-xs text-[#6B7280]">Overwhelm</span>
+                      <span className="text-xs text-black/70">Overwhelm</span>
                     </div>
                   </div>
                 </>
@@ -472,7 +470,7 @@ export default function Home() {
                       <span className="text-xs font-semibold text-[#4F46E5]">One tile</span>
                     </div>
                     <div className="h-16 bg-white rounded-lg border border-[#E5E7EB] flex items-center justify-center">
-                      <span className="text-xs text-[#6B7280]">⏱️ Timer</span>
+                      <span className="text-xs text-black/70">⏱️ Timer</span>
                     </div>
                   </div>
                   <div className="space-y-2">
@@ -480,13 +478,13 @@ export default function Home() {
                       <span className="text-xs text-[#059669]">✓ Calm</span>
                     </div>
                     <div className="h-16 bg-white rounded-lg border border-[#E5E7EB] flex items-center justify-center">
-                      <span className="text-xs text-[#6B7280]">Progress</span>
+                      <span className="text-xs text-black/70">Progress</span>
                     </div>
                   </div>
                 </>
               )}
             </div>
-            <p className="text-[#6B7280] mt-4 leading-relaxed">
+            <p className="text-black/70 mt-4 leading-relaxed">
               We remove decisions. You keep control.
             </p>
           </div>
@@ -495,18 +493,18 @@ export default function Home() {
           <div className="bg-white rounded-xl p-6 md:p-8 border border-[#E5E7EB] shadow-sm">
             <div className="flex items-center gap-3 mb-4">
               <div className="text-2xl">✨</div>
-              <h3 className="text-xl font-semibold text-[#1F2933]">Shame-free</h3>
+              <h3 className="text-xl font-semibold text-black">Shame-free</h3>
             </div>
-            <div className="bg-[#FAFAF9] rounded-lg p-6 border border-[#E5E7EB]">
+            <div className="bg-gray-50 rounded-lg p-6 border border-[#E5E7EB]">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-12 h-12 bg-white rounded-lg border border-[#E5E7EB] flex items-center justify-center">
                   <span className="text-xl">📧</span>
                 </div>
                 <div className="flex-1">
-                  <div className="text-sm font-medium text-[#1F2933]">Reply to email</div>
-                  <div className="text-xs text-[#6B7280]">Missed yesterday</div>
+                  <div className="text-sm font-medium text-black">Reply to email</div>
+                  <div className="text-xs text-black/70">Missed yesterday</div>
                 </div>
-                <div className="text-sm text-[#6B7280]">→</div>
+                <div className="text-sm text-black/70">→</div>
                 <div className="px-3 py-1.5 bg-[#86EFAC]/20 border border-[#86EFAC]/30 rounded-lg">
                   <span className="text-xs font-medium text-[#059669]">Let&apos;s make it smaller</span>
                 </div>
@@ -515,7 +513,7 @@ export default function Home() {
                 <div className="h-1 bg-[#86EFAC] rounded-full w-3/4"></div>
               </div>
             </div>
-            <p className="text-[#6B7280] mt-4 leading-relaxed">
+            <p className="text-black/70 mt-4 leading-relaxed">
               Showing up counts. Even for 5 minutes.
             </p>
           </div>
@@ -524,29 +522,29 @@ export default function Home() {
         {/* 5. BEHAVIORAL PROOF */}
         <section className="mb-16 md:mb-24">
           <div className="text-center mb-6 md:mb-8">
-            <h2 className="text-xl sm:text-2xl font-semibold text-[#1F2933] mb-2">What usually happens</h2>
-            <p className="text-sm sm:text-base text-[#6B7280]">Real behavior, not testimonials</p>
+            <h2 className="text-xl sm:text-2xl font-semibold text-black mb-2">What usually happens</h2>
+            <p className="text-sm sm:text-base text-black/70">Real behavior, not testimonials</p>
           </div>
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
             <div className="bg-white rounded-xl p-6 border border-[#E5E7EB] shadow-sm text-center">
               <div className="text-3xl font-semibold text-[#4F46E5] mb-2">12 min</div>
-              <p className="text-sm text-[#6B7280]">Most first steps take under 12 minutes</p>
+              <p className="text-sm text-black/70">Most first steps take under 12 minutes</p>
             </div>
             <div className="bg-white rounded-xl p-6 border border-[#E5E7EB] shadow-sm text-center">
               <div className="text-3xl font-semibold text-[#4F46E5] mb-2">2 min</div>
-              <p className="text-sm text-[#6B7280]">People finish their first tile in under 2 minutes</p>
+              <p className="text-sm text-black/70">People finish their first tile in under 2 minutes</p>
             </div>
             <div className="bg-white rounded-xl p-6 border border-[#E5E7EB] shadow-sm text-center">
               <div className="text-3xl font-semibold text-[#4F46E5] mb-2">Auto</div>
-              <p className="text-sm text-[#6B7280]">Avoided tasks shrink automatically</p>
+              <p className="text-sm text-black/70">Avoided tasks shrink automatically</p>
             </div>
           </div>
         </section>
 
         {/* 6. LOW-PRESSURE CTA */}
         <section className="bg-white rounded-2xl p-8 md:p-12 border border-[#E5E7EB] shadow-sm text-center">
-          <h2 className="text-2xl sm:text-3xl font-semibold text-[#1F2933] mb-4">Create one calm step</h2>
-          <p className="text-base sm:text-lg text-[#6B7280] mb-6">No card. No pressure.</p>
+          <h2 className="text-2xl sm:text-3xl font-semibold text-black mb-4">Create one calm step</h2>
+          <p className="text-base sm:text-lg text-black/70 mb-6">No card. No pressure.</p>
           <div className="flex flex-col items-center gap-2">
             <Link
               href="/signup"
@@ -554,7 +552,7 @@ export default function Home() {
             >
               Try it once. No commitment.
             </Link>
-            <p className="text-xs text-[#6B7280]">Takes ~60 seconds</p>
+            <p className="text-xs text-black/60">Takes ~60 seconds</p>
           </div>
         </section>
       </main>
