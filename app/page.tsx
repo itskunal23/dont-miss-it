@@ -5,22 +5,57 @@ import { useState, useEffect, useRef } from 'react'
 
 export default function Home() {
   const [demoText, setDemoText] = useState('')
+  const [showArrow, setShowArrow] = useState(false)
   const [showTile, setShowTile] = useState(false)
+  const [tileAnimationStage, setTileAnimationStage] = useState<'entering' | 'visible' | 'hidden'>('hidden')
   const [chartVisible, setChartVisible] = useState(false)
   const [featureToggle, setFeatureToggle] = useState<'before' | 'after'>('before')
+  const [isTyping, setIsTyping] = useState(false)
   const chartRef = useRef<HTMLDivElement>(null)
+  const typingIntervalRef = useRef<NodeJS.Timeout | null>(null)
+
+  const demoTextFull = 'Reply to email, pay bill, study for exam'
 
   useEffect(() => {
     // Auto-demo after 2 seconds if no interaction
     const timer = setTimeout(() => {
-      if (!demoText) {
-        setDemoText('Reply to email, pay bill, study for exam')
-        setTimeout(() => setShowTile(true), 800)
+      if (!demoText && !isTyping) {
+        setIsTyping(true)
+        let currentIndex = 0
+        
+        typingIntervalRef.current = setInterval(() => {
+          if (currentIndex < demoTextFull.length) {
+            setDemoText(demoTextFull.slice(0, currentIndex + 1))
+            currentIndex++
+          } else {
+            if (typingIntervalRef.current) {
+              clearInterval(typingIntervalRef.current)
+              typingIntervalRef.current = null
+            }
+            setIsTyping(false)
+            // Show arrow after typing completes
+            setTimeout(() => {
+              setShowArrow(true)
+              // Show tile after arrow appears
+              setTimeout(() => {
+                setTileAnimationStage('entering')
+                setTimeout(() => setTileAnimationStage('visible'), 100)
+                setShowTile(true)
+              }, 600)
+            }, 500)
+          }
+        }, 50) // Typing speed
       }
     }, 2000)
 
-    return () => clearTimeout(timer)
-  }, [demoText])
+    return () => {
+      clearTimeout(timer)
+      if (typingIntervalRef.current) {
+        clearInterval(typingIntervalRef.current)
+        typingIntervalRef.current = null
+      }
+    }
+  }, [])
 
   useEffect(() => {
     // Intersection observer for chart animations
@@ -43,11 +78,29 @@ export default function Home() {
   }, [])
 
   const handleDemoInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setDemoText(e.target.value)
-    if (e.target.value.length > 10) {
-      setTimeout(() => setShowTile(true), 500)
+    const value = e.target.value
+    setDemoText(value)
+    
+    // Stop auto-typing if user starts typing
+    if (typingIntervalRef.current) {
+      clearInterval(typingIntervalRef.current)
+      typingIntervalRef.current = null
+      setIsTyping(false)
+    }
+    
+    if (value.length > 10) {
+      setTimeout(() => {
+        setShowArrow(true)
+        setTimeout(() => {
+          setTileAnimationStage('entering')
+          setTimeout(() => setTileAnimationStage('visible'), 100)
+          setShowTile(true)
+        }, 600)
+      }, 300)
     } else {
+      setShowArrow(false)
       setShowTile(false)
+      setTileAnimationStage('hidden')
     }
   }
 
@@ -106,38 +159,98 @@ export default function Home() {
 
           {/* Right: Interactive Demo */}
           <div className="space-y-4">
-            <div className="bg-white rounded-xl p-4 border border-[#E5E7EB] shadow-sm">
+            <div className="bg-white rounded-xl p-4 border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-md relative">
               <label className="block text-sm font-medium text-[#6B7280] mb-2">Brain dump</label>
-              <textarea
-                value={demoText}
-                onChange={handleDemoInput}
-                placeholder="Reply to email, pay bill, study..."
-                rows={3}
-                className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5] resize-none text-[#1F2933] placeholder:text-[#9CA3AF]"
-              />
+              <div className="relative">
+                <textarea
+                  value={demoText}
+                  onChange={handleDemoInput}
+                  placeholder="Reply to email, pay bill, study..."
+                  rows={3}
+                  className="w-full px-3 py-2 border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5] resize-none text-[#1F2933] placeholder:text-[#9CA3AF] transition-all duration-200"
+                />
+                {isTyping && (
+                  <span className="absolute bottom-3 left-3 text-[#4F46E5] animate-pulse font-mono">|</span>
+                )}
+              </div>
             </div>
 
-            {/* Animated arrow */}
-            {showTile && (
-              <div className="flex justify-center animate-gentle-float">
-                <div className="text-[#4F46E5]">↓</div>
+            {/* Animated arrow with bounce */}
+            {showArrow && (
+              <div className="flex justify-center overflow-hidden">
+                <div 
+                  className="text-3xl text-[#4F46E5] animate-bounce"
+                  style={{
+                    animation: 'bounce 0.6s ease-in-out',
+                    animationFillMode: 'both'
+                  }}
+                >
+                  ↓
+                </div>
               </div>
             )}
 
-            {/* Tile appears */}
+            {/* Tile appears with smooth animation */}
             {showTile && (
-              <div className="bg-white rounded-xl p-6 border-2 border-[#4F46E5]/30 shadow-md animate-gentle-float">
-                <div className="flex items-center justify-between mb-3">
+              <div 
+                className={`bg-white rounded-xl p-6 border-2 border-[#4F46E5]/30 shadow-lg transition-all duration-500 ${
+                  tileAnimationStage === 'entering' 
+                    ? 'opacity-0 translate-y-8 scale-95' 
+                    : 'opacity-100 translate-y-0 scale-100'
+                }`}
+                style={{
+                  animation: tileAnimationStage === 'visible' ? 'gentle-float 4s ease-in-out infinite' : undefined
+                }}
+              >
+                {/* Header - appears first */}
+                <div 
+                  className="flex items-center justify-between mb-3"
+                  style={{
+                    animation: tileAnimationStage === 'visible' ? 'fadeInUp 0.4s ease-out 0.1s both' : undefined
+                  }}
+                >
                   <span className="text-xs font-semibold text-[#4F46E5] uppercase tracking-wide">One Tile</span>
-                  <span className="px-2 py-1 bg-[#86EFAC]/20 text-[#059669] rounded-md text-xs font-medium">low</span>
+                  <span className="px-2 py-1 bg-[#86EFAC]/20 text-[#059669] rounded-md text-xs font-medium animate-soft-pulse">low</span>
                 </div>
-                <h3 className="text-lg font-semibold text-[#1F2933] mb-2">Reply to email</h3>
-                <p className="text-sm text-[#6B7280] mb-4">Next: write 1 line</p>
-                <div className="flex items-center gap-3 mb-4">
+                
+                {/* Title - appears second */}
+                <h3 
+                  className="text-lg font-semibold text-[#1F2933] mb-2"
+                  style={{
+                    animation: tileAnimationStage === 'visible' ? 'fadeInUp 0.4s ease-out 0.2s both' : undefined
+                  }}
+                >
+                  Reply to email
+                </h3>
+                
+                {/* Next step - appears third */}
+                <p 
+                  className="text-sm text-[#6B7280] mb-4"
+                  style={{
+                    animation: tileAnimationStage === 'visible' ? 'fadeInUp 0.4s ease-out 0.3s both' : undefined
+                  }}
+                >
+                  Next: write 1 line
+                </p>
+                
+                {/* Tags - appear fourth */}
+                <div 
+                  className="flex items-center gap-3 mb-4"
+                  style={{
+                    animation: tileAnimationStage === 'visible' ? 'fadeInUp 0.4s ease-out 0.4s both' : undefined
+                  }}
+                >
                   <span className="px-2.5 py-1 bg-[#4F46E5]/10 text-[#4F46E5] rounded-md text-xs font-medium">⏱️ 10 min</span>
                   <span className="px-2.5 py-1 bg-[#F8FAFC] text-[#6B7280] rounded-md text-xs">work</span>
                 </div>
-                <button className="w-full py-2.5 px-4 bg-[#4F46E5] text-white rounded-lg font-semibold hover:bg-[#4338CA] transition-colors text-sm">
+                
+                {/* Button - appears last */}
+                <button 
+                  className="w-full py-2.5 px-4 bg-[#4F46E5] text-white rounded-lg font-semibold hover:bg-[#4338CA] transition-all duration-200 text-sm shadow-sm hover:shadow-md transform hover:scale-[1.02]"
+                  style={{
+                    animation: tileAnimationStage === 'visible' ? 'fadeInUp 0.4s ease-out 0.5s both' : undefined
+                  }}
+                >
                   Start
                 </button>
               </div>
